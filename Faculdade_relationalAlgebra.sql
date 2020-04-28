@@ -32,21 +32,26 @@ WHERE nota>=10 AND nr=alunonr))
 
 --9
 SELECT DISTINCT nota FROM Prova P1 WHERE not exists(select * from Prova P2 where P1.nota < P2.nota);
+SELECT max(prova.nota) FROM prova;
 
 --10
 SELECT DISTINCT (select avg(nota) FROM Prova WHERE Prova.cod == 'BD') FROM Prova;
+SELECT avg(prova.nota) FROM prova WHERE prova.cod='BD';
 
 --11
 SELECT count(*) FROM Aluno;
+SELECT count(aluno.nome) FROM aluno;
 
 --12
-
+SELECT cadeira.curso, count(*) FROM cadeira GROUP BY cadeira.curso;
 --13
+SELECT aluno.Nome, count(*) FROM aluno, prova WHERE aluno.nr = prova.nr GROUP BY aluno.Nome;
 
 --14
-
+SELECT avg(number) as avgProvasAluno
+FROM (SELECT count(*) AS number FROM aluno, prova WHERE aluno.nr = prova.nr GROUP BY aluno.nr);
 --15
-
+SELECT Nome, avg(nota) FROM (SELECT nr, max(nota) AS nota FROM prova GROUP BY nr, cod) NATURAL JOIN aluno WHERE nota >= 10 GROUP BY nr;
 --16
 
 
