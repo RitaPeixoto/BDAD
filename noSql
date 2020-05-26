@@ -1,0 +1,48 @@
+--1 Quantos	tweets	têm	como	source	o	twitter	versão	‘web’? --> 23136
+db.tweets.find({'source':'web'}).count() 
+
+--2 Quantos	tweets	têm	a	hashtag	‘javascript’? --> 51428
+db.tweets.find({'entities.hashtags':{'$ne':'javascript'}}).count()
+
+
+--3 Quais	são	as	hashtags	mais	populares?	(utilize	a	função	aggregate() )
+db.tweets.aggregate([{'$sortByCount':'$entities.hashtags.text'}]);
+
+
+--4 Quantos	tweets	têm	utilizadores	com	mais	de	100	followers? --> 0
+db.tweets.find({'user.followers.count': {'$gt':100}}).count()
+
+
+--5 Ordena	100	tweets	aleatórios	pelo	número	de	amigos	dos	utilizadores	por	 ordem	decrescente.
+db.tweets.find().limit(100).sort({'user.friend_count':-1})
+
+
+--6 Quantos	tweets	falam	do	Cristiano	Ronaldo? --> 1
+db.tweets.find({'text': {'$regex':'Cristiano Ronaldo'}})
+
+
+--7 Quantos	tweets	têm	utilizadores	com	timezone	‘Lisbon’	?--> 90
+db.tweets.find({'user.time_zone':'Lisbon'}).count()
+
+
+--8 Encontra	timezones	distintas	na	coleção.
+db.tweets.distinct('user.time_zone')
+
+
+--9 . Qual	é	a	timezone	com	mais	tweets?	(utilize	a	função	aggregate() )
+db.tweets.aggregate([{'$sortByCount':'$user.time_zone'}]);
+
+--10  Um	tweet	com	menções	a	outros	utilizadores  --> 27069
+db.tweets.find({'entities.user_mentions':{'$ne':[]}}).count()
+
+
+--11 Quantos	tweets	têm	menções	a	outros	utilizadores? --> 51428
+db.tweets.find({'user.user_mentions':{'$ne':[]}}).count()
+
+--12 Quantos	tweets	têm	3	menções	a	outros	utilizadores?
+
+--13 Quantos	tweets	têm	3	menções	a	outros	utilizadores	e	2	hashtags?
+
+--14 Existe	um	utilizador	com	mais	de	7	tweets	na	coleção.	Qual	o	seu	screen_name?	(utilize	a	função	aggregate() )
+
+--15  Qual	é	o	tweet	com	maior	número	de	hashtags?	(utilize	a	função	aggregate() )
