@@ -16,6 +16,6 @@ Resolução de alguns dos exercícios das aulas práticas + Projeto
 
 ### Projeto realizado com:
  
- * Mariana Truta
+ * Mariana Truta (@mariana1412)
 
- * Inês Silva
+ * Inês Silva (@reluzita)
